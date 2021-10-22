@@ -4,10 +4,10 @@ import { Button } from "react-bootstrap";
 function ToDoListItem(props) {
   return (
     <>
-      <div classNmae="container">
-        <div class="row" style={{ marginTop: "20px" }}>
-          <div className="col">
-            <li>{props.item}</li>
+      <div className="container">
+        <div class="row">
+        <li>  <div className="col">
+            {props.item}
           </div>
           <div className="col">
             <Button
@@ -20,7 +20,7 @@ function ToDoListItem(props) {
               Delete
             </Button>
           </div>
-        </div>
+       </li> </div>
       </div>
     </>
   );

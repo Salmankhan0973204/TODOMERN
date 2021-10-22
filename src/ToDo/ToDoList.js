@@ -28,25 +28,26 @@ function ToDoList() {
     axios.get("http://localhost:8000/GetToDo").then(
       (res) => {
         const Data = res.data.data;
-        setItems({ ...items, Data });
+            setItems(Data);
+            console.log(items)
       },
       (error) => {
         console.log("Failed");
       }
     );
 
-    console.log(items);
+    
 
     setInputlist("");
   };
 
-  // const deleteItem = (id) => {
-  //   setItems((olddata) => {
-  //     return olddata.filter((arr, index) => {
-  //       return index !== id;
-  //     });
-  //   });
-  // };
+  const deleteItem = (id) => {
+    setItems((olddata) => {
+      return olddata.filter((arr, index) => {
+        return index !== id;
+      });
+    });
+  };
   return (
     <div className="main_div">
       <div className="centre_div">
@@ -62,18 +63,25 @@ function ToDoList() {
         />
         <Button onClick={listItem} variant="primary" size="sm">
           +
-        </Button>{" "}
-        {items.map((item, index) => {
-            return (
-              <ToDoListItem
+              </Button>
+              
+        
+         {Object.keys(items).map((item, index) => {
+           return (
+             <ol> 
+            <ToDoListItem
                 key={index}
                 id={index}
                 item={item}
-                // deleteItem={deleteItem}
-              />
+              deleteItem={deleteItem}
+                    
+               />
+               </ol>
+       
             );
           })}
-        
+         
+      
       </div>
     </div>
   );

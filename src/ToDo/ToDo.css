@@ -57,13 +57,7 @@ Button {
   margin-top: 30px;
 }
 
-button:hover {
-  background-color: #20bf6b;
-}
 
-ol {
-  margin-top: 50px;
-}
 ol li {
   text-align: left;
   font-size: 20px;
@@ -74,10 +68,7 @@ ol li {
   color: #8466aa;
   justify-content: space-around;
 }
-.ActionBtn {
-  display:flex;
-  align-items: flex-end;
-}
+
 .todo_style {
   display: flex;
   justify-content: space-around;
