@@ -42,6 +42,7 @@ app.post("/Login", LoginController.Login);
 app.post("/ToDo", ToDoController.ToDoList);
 app.get("/GetToDo", ToDoController.GetToDo);
 app.post("/ToDoDelete", ToDoController.ToDoDelete);
+app.post("/edititem",ToDoController.edititem );
 
 app.listen(PORT, () => {
   console.log(`App listen port ${PORT}`);

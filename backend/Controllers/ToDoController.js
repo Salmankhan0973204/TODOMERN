@@ -45,3 +45,10 @@ exports.ToDoDelete=(req, res) => {
    });
   
 }
+
+exports.edititem = (req, res) => {
+  var Data = req.body;
+  ToDo.findOne({_id: Data._id }).then(ress => {
+    res.status(200).json({ message: "item edit", data: ress })
+  })
+}

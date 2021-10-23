@@ -18,34 +18,48 @@ function ToDoList() {
     setInputlist({ [name]: value });
   };
 
-  const deleteItem = (async (index) => {
-    console.log (index)
-   await axios.post("http://localhost:8000/ToDoDelete", {_id: index}).then(
-      (res) => { console.log() },
+  const deleteItem = async (index) => {
+    console.log(index);
+    await axios.post("http://localhost:8000/ToDoDelete", { _id: index }).then(
+      (res) => {
+        GetData();
+      },
       (error) => {
         console.log("Failed");
       }
     );
-  
-  });
-  const listItem = (async() => {
-   await axios.post("http://localhost:8000/ToDo", inputlist).then(
-      (res) => console.log(),
+  };
+  const listItem = async () => {
+    await axios.post("http://localhost:8000/ToDo", inputlist).then(
+      (res) => console.log("sdafds"),
       (error) => {
         console.log("Failed");
-      },
-        
-      axios.get("http://localhost:8000/GetToDo").then(
-        (res) => {
-          const Data = res.data.data;
-          setItems(Data)
-        }
-    
-      )
+      }
+    );
+    GetData();
+  };
 
-    )
-  })
+  const GetData = () => {
+    axios.get("http://localhost:8000/GetToDo").then((res) => {
+      const Data = res.data.data;
+      setItems(Data);
+    });
+  };
+  const editItem = (index) => {
+    let newEdit = items.find((item) => {
+      return item._id === index
+      
+    })
+    console.log(newEdit)
+    setInputlist(newEdit)
 
+   
+  }
+      
+       
+       
+   
+ 
 
   return (
     <div className="main_div">
@@ -70,9 +84,10 @@ function ToDoList() {
                 <ol>
                   <ToDoListItem
                     key={index}
-                    id={index}
+                    id={item._id}
                     item={item.todo}
                     deleteItem={deleteItem}
+                    editItem={editItem}
                   />
                 </ol>
               );
