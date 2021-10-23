@@ -2,12 +2,12 @@ import Header from "./Header";
 import "./App.css";
 import Login from "./Auth/Login";
 import Register from "./Auth/Register";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import ToDoList from "./ToDo/ToDoList";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{}}>
       <Header />
       <Router>
         <Route exact path="/" component={Login} />

@@ -14,7 +14,7 @@ function ToDoListItem(props) {
               variant="danger"
               size="sm"
               onClick={() => {
-                props.deleteItem(props.id);
+              props.deleteItem(props.id);
               }}
             >
               Delete

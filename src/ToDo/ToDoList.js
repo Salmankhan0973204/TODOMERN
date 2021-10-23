@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ToDoListItem from "./ToDoItem";
 
 import { Button } from "react-bootstrap";
@@ -10,6 +10,7 @@ function ToDoList() {
     todo: "",
   });
   const [items, setItems] = useState([]);
+  console.log(items);
 
   const itemEvent = (e) => {
     const name = e.target.name;
@@ -17,37 +18,35 @@ function ToDoList() {
     setInputlist({ [name]: value });
   };
 
-  const listItem = () => {
-    axios.post("http://localhost:8000/ToDo", inputlist).then(
+  const deleteItem = (async (index) => {
+    console.log (index)
+   await axios.post("http://localhost:8000/ToDoDelete", {_id: index}).then(
+      (res) => { console.log() },
+      (error) => {
+        console.log("Failed");
+      }
+    );
+  
+  });
+  const listItem = (async() => {
+   await axios.post("http://localhost:8000/ToDo", inputlist).then(
       (res) => console.log(),
       (error) => {
         console.log("Failed");
-      }
-    );
-
-    axios.get("http://localhost:8000/GetToDo").then(
-      (res) => {
-        const Data = res.data.data;
-            setItems(Data);
-            console.log(items)
       },
-      (error) => {
-        console.log("Failed");
-      }
-    );
-
+        
+      axios.get("http://localhost:8000/GetToDo").then(
+        (res) => {
+          const Data = res.data.data;
+          setItems(Data)
+        }
     
+      )
 
-    setInputlist("");
-  };
+    )
+  })
 
-  const deleteItem = (id) => {
-    setItems((olddata) => {
-      return olddata.filter((arr, index) => {
-        return index !== id;
-      });
-    });
-  };
+
   return (
     <div className="main_div">
       <div className="centre_div">
@@ -63,25 +62,25 @@ function ToDoList() {
         />
         <Button onClick={listItem} variant="primary" size="sm">
           +
-              </Button>
-              
-        
-         {Object.keys(items).map((item, index) => {
-           return (
-             <ol> 
-            <ToDoListItem
-                key={index}
-                id={index}
-                item={item}
-              deleteItem={deleteItem}
-                    
-               />
-               </ol>
-       
-            );
-          })}
-         
-      
+        </Button>
+        {items ? (
+          <>
+            {items.map((item, index) => {
+              return (
+                <ol>
+                  <ToDoListItem
+                    key={index}
+                    id={index}
+                    item={item.todo}
+                    deleteItem={deleteItem}
+                  />
+                </ol>
+              );
+            })}
+          </>
+        ) : (
+          <h1>Loading</h1>
+        )}
       </div>
     </div>
   );

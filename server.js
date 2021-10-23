@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
-const port = 8000;
+const PORT = process.env.PORT || 8000;
 
 app.use(express.json());
 app.use(
@@ -41,7 +41,8 @@ app.post("/Login", LoginController.Login);
 //ToDo API
 app.post("/ToDo", ToDoController.ToDoList);
 app.get("/GetToDo", ToDoController.GetToDo);
+app.post("/ToDoDelete", ToDoController.ToDoDelete);
 
-app.listen(port, () => {
-  console.log(`App listen port ${port}`);
+app.listen(PORT, () => {
+  console.log(`App listen port ${PORT}`);
 });

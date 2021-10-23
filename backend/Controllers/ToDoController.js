@@ -35,3 +35,13 @@ exports.GetToDo = (req, res) => {
       });
     });
 };
+
+exports.ToDoDelete=(req, res) => {
+  var Data = req.body;
+  console.log(Data)
+   ToDo.findByIdAndRemove(Data._id).then((data) => {
+     res.status(200).json({ message: "Value Deleted" });
+    
+   });
+  
+}
